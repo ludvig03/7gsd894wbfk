@@ -44,6 +44,10 @@ function Decode() {
     }
   }
 
+  useEffect(() => {
+    window.alert("hint, ha på lyd")
+  }, [])
+
 
 
 
