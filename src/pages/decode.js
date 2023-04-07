@@ -37,7 +37,7 @@ function Decode() {
   }
 
   function handleDecode() {
-    if (input === 'varmt') {
+    if (input === 'varmt' || input === 'Varmt' || input === 'VARMT') {
       window.alert('Du har klart å dekode koden, gratulerer!')
     } else {
       window.alert('Du har ikke klart å dekode koden, prøv igjen!')

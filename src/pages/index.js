@@ -1,7 +1,69 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Router from 'next/router';
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyD-Izc_Bx11r3Y3kHi_42_t4uNfPx6DIzM",
+  authDomain: "paskeegg-img.firebaseapp.com",
+  projectId: "paskeegg-img",
+  storageBucket: "paskeegg-img.appspot.com",
+  messagingSenderId: "524627567896",
+  appId: "1:524627567896:web:7423f9e3639ab8dcafaa6d",
+  measurementId: "G-9NEMJYNZQD"
+};
+const app = initializeApp(firebaseConfig);
 
 function Home() {
+
+  //download the latest photo in my firebase storage
+
+  const [image, setImage] = useState(null);
+
+  // download latest image from my firebase storage and save it to the image state, this is the folder path gs://paskeegg-img.appspot.com/images
+
+  const storage = getStorage();
+  const storageRef = ref(storage, '/images');
+  const imageRef = ref(storage, 'images/bilde');
+
+  useEffect(() => {
+    getDownloadURL(imageRef).then((url) => {
+      setImage(url);
+    }).catch((error) => {
+      switch (error.code) {
+        case 'storage/object-not-found':
+          console.log('File doesnt exist');
+          break;
+        case 'storage/unauthorized':
+          console.log('User doesnt have permission to access the object');
+          break;
+        case 'storage/canceled':
+          console.log('User canceled the upload');
+          break;
+        case 'storage/unknown':
+          console.log('Unknown error occurred, inspect the server response');
+          break;
+      }
+    });
+  }, []);
+
+  
+
+  
+
+
+
+
+
+
+
+
 
   const router = Router;
 
@@ -38,6 +100,11 @@ function Home() {
     }
   }
 
+  // download image from firebase storage and display it
+
+  
+
+
   function setInputUsernameFunc(e) {
     setInputUsername(e.target.value);
   }
@@ -56,7 +123,7 @@ function Home() {
       </div>
       <div className=''>
         <button onClick={()=>{handleLogin()}} className='mt-4 mx-auto border-2 font-bold py-2 px-4 rounded'>Logg inn</button>
-        <img src="https://i.ibb.co/F0Wy6WP/image.jpg"></img>
+        <img src={image}></img>
       </div>
     </div>
   );
