@@ -68,7 +68,7 @@ function Home() {
   const router = Router;
 
   const [username, setUsername] = useState('bølgetid');
-  const [password, setPassword] = useState('fisk');
+  const [password, setPassword] = useState('FISK');
 
   const [inputUsername, setInputUsername] = useState('');
   const [inputPassword, setInputPassword] = useState('');
