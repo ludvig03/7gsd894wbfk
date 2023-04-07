@@ -53,7 +53,7 @@ function Home() {
     });
   }, []);
 
-  
+
 
   
 
@@ -67,8 +67,8 @@ function Home() {
 
   const router = Router;
 
-  const [username, setUsername] = useState('test');
-  const [password, setPassword] = useState('1234');
+  const [username, setUsername] = useState('bølgetid');
+  const [password, setPassword] = useState('fisk');
 
   const [inputUsername, setInputUsername] = useState('');
   const [inputPassword, setInputPassword] = useState('');
