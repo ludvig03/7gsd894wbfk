@@ -53,6 +53,17 @@ function Home() {
     });
   }, []);
 
+  // make the page reload every 20 seconds
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      window.location.reload();
+    }, 20000);
+    return () => clearInterval(interval);
+  }, []);
+
+  
+
 
 
   
